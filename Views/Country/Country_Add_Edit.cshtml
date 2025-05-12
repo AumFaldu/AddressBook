@@ -1,0 +1,49 @@
+﻿@model CountryModel
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@TempData["PageTitle"]</h5>
+
+        <!-- Vertical Form -->
+        <form class="row g-3" asp-action="CountrySave" asp-controller="Country" method="post">
+
+            <input type="hidden" asp-for="@Model.CountryID" />
+
+            <div class="col-12">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingName4" placeholder="Enter Country Name" asp-for="CountryName">
+                    <label for="floatingName4" asp-for="CountryName">Country Name</label>
+                </div>
+                <span asp-validation-for="CountryName" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingCode4" placeholder="Enter Country Code" asp-for="CountryCode">
+                    <label for="floatingCode4" asp-for="CountryCode">Country Code</label>
+                </div>
+                <span asp-validation-for="CountryCode" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <div class="form mb-3">
+                    <select class="form-control" asp-for="UserID">
+                        <option value="">Select User</option>
+						@foreach (var user in @ViewBag.UserList)
+						{
+							<option value="@user.UserID">@user.UserName</option>
+						}
+                    </select>
+                </div>
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+        </form><!-- Vertical Form -->
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>

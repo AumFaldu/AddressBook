@@ -1,0 +1,53 @@
+﻿@model DataTable
+@using System.Data
+<div class="pagetitle">
+    <h1>User List</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item">User</li>
+            <li class="breadcrumb-item active">User List</li>
+        </ol>
+    </nav>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">User List</h5>
+        <span class="text-danger">@TempData["ErrorMessage"]</span>
+        <div class="d-flex justify-content-end mb-3">
+            <a class="btn btn-warning" asp-controller="User" asp-action="UserExportToExcel">Export</a>
+            <a class="btn btn-primary" asp-controller="User" asp-action="Registration">+ Add User</a>
+        </div>
+        <table class="table datatable table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>UserID</th>
+                    <th>UserName</th>
+                    <th>MobileNo</th>
+                    <th>EmailID</th>
+                    <th>CreationDate</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataRow dataRow in Model.Rows)
+                {
+                    <tr>
+                        <td>@dataRow["UserID"]</td>
+                        <td>@dataRow["UserName"]</td>
+                        <td>@dataRow["MobileNo"]</td>
+                        <td>@dataRow["EmailID"]</td>
+                        <td>@dataRow["CreationDate"]</td>
+                        <td>
+							<a class="btn btn-outline-success" asp-controller="User" asp-action="Registration" asp-route-UserID="@dataRow["UserID"]" ><i class="bi bi-pen-fill">Edit</i></a>
+                            <a asp-controller="User" asp-action="UserDelete" asp-route-UserID="@dataRow["UserID"]" class="btn btn-outline-danger btn-xs" onclick="return confirm('Are you sure you want to delete?');">
+								<i class="bi bi-x"></i>Delete
+							</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

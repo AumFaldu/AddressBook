@@ -1,0 +1,58 @@
+﻿@model DataTable
+@using System.Data
+<div class="pagetitle">
+    <h1>City List</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item">City</li>
+            <li class="breadcrumb-item active">City List</li>
+        </ol>
+    </nav>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">City List</h5>
+        <span class="text-danger">@TempData["ErrorMessage"]</span>
+        <div class="d-flex justify-content-end mb-3">
+            <a class="btn btn-warning" asp-controller="City" asp-action="CityExportToExcel">Export</a>
+        <a class="btn btn-primary" asp-controller="City" asp-action="City_Add_Edit">+ Add City</a>
+        </div>
+        <table class="table datatable table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>CityID</th>
+                    <th>StateID</th>
+                    <th>CountryID</th>
+                    <th>CityName</th>
+                    <th>STDCode</th>
+                    <th>PinCode</th>
+                    <th>CreationDate</th>
+                    <th>UserID</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(DataRow dataRow in Model.Rows){
+                    <tr>
+                        <td>@dataRow["CityID"]</td>
+                        <td>@dataRow["StateID"]</td>
+                        <td>@dataRow["CountryID"]</td>
+                        <td>@dataRow["CityName"]</td>
+                        <td>@dataRow["STDCode"]</td>
+                        <td>@dataRow["PinCode"]</td>
+                        <td>@dataRow["CreationDate"]</td>
+                        <td>@dataRow["UserID"]</td>
+                        <td>
+                            <a class="btn btn-outline-success" asp-controller="City" asp-action="City_Add_Edit" asp-route-CityID="@dataRow["CityID"]"><i class="bi bi-pen-fill">Edit</i></a>
+                            <a asp-controller="City" asp-action="CityDelete" asp-route-CityID="@dataRow["CityID"]" class="btn btn-outline-danger btn-xs" onclick="return confirm('Are you sure you want to delete?');">
+                                <i class="bi bi-x"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

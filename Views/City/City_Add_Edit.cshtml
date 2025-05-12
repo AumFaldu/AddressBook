@@ -1,0 +1,72 @@
+﻿@model CityModel
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@TempData["PageTitle"]</h5>
+
+        <!-- Vertical Form -->
+        <form class="row g-3" method="post" asp-action="CitySave" asp-controller="City">
+            <input type="hidden" asp-for="@Model.CityID" />
+            <div class="col-12">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingName4" placeholder="Enter City Name" asp-for="CityName">
+                    <label for="floatingName4" asp-for="CityName">City Name</label>
+                </div>
+                <span asp-validation-for="CityName" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingEmail4" placeholder="Enter STD Code" asp-for="STDCode">
+                    <label for="floatingEmail4" asp-for="STDCode">STD Code</label>
+                </div>
+                <span asp-validation-for="STDCode" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingPassword4" placeholder="Enter PinCode" asp-for="PinCode">
+                    <label for="floatingPassword4" asp-for="PinCode">Pincode</label>
+                </div>
+                <span asp-validation-for="PinCode" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <select class="form-control" asp-for="CountryID" id="CountryID">
+                    <option value="">Select Country</option>
+                    @foreach (var country in @ViewBag.CountryList)
+                    {
+                        <option value="@country.CountryID">@country.CountryName</option>
+                    }
+                </select>
+                <span asp-validation-for="CountryID" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <select class="form-control" asp-for="StateID">
+                    <option value="">Select State</option>
+                    @foreach (var state in @ViewBag.StateList)
+                    {
+                        <option value="@state.StateID">@state.StateName</option>
+                    }
+                </select>
+                <span asp-validation-for="StateID" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <select class="form-control" asp-for="UserID">
+                    <option value="">Select User</option>
+                    @foreach (var user in @ViewBag.UserList)
+                    {
+                        <option value="@user.UserID">@user.UserName</option>
+                    }
+                </select>
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+        </form><!-- Vertical Form -->
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
